@@ -11,7 +11,7 @@ class ListaAdyacenciaGrafo<T> : Grafo<T> {
         val listaSucesores = adyacencias[desde] /: return false //Usando la nulidad de kotlin podemos verificar que ambos existen
         if (!adyacencias.containsKey(hasta)) return false
 
-        if (listaSuceros.contains(hasta)) return false //Evitamos duplicados si no es un multigrafo
+        if (listaSucesores.contains(hasta)) return false //Evitamos duplicados si no es un multigrafo
 
         return listaSucesores.add(hasta)
     }
@@ -38,6 +38,28 @@ class ListaAdyacenciaGrafo<T> : Grafo<T> {
         }
 
         return true
+    }
+    override fun subgrafo(vertices: Collection<T>): Grafo<T> {
+        val subgrafo = ListaAdyacenciaGrafo<T>()
+
+        //Agregamos solo aquellos vertices que existen en el grafo original
+        vertices.filter { contiene(it) }.forEach { vertice -> subgrafo.agregarvertice(vertice)
+        }
+
+        //Agregamos arcos que conectan estos vertices entre ellos
+        subgrafo.adyacencias.keys.forEach { desde ->
+            val sucesoresOriginales = adyacencias[desde] ?: emptyList()
+
+            sucesoresOriginales.forEach { hasta ->
+                if (hasta in subgrafo.adyacencias) {
+                    subgrafo.conectar(desde, hasta)
+                }
+
+            }
+
+        }
+        
+        return subgrafo
     }
 }
 

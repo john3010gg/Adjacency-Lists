@@ -29,7 +29,7 @@ fun main() {
     //Subgrafo
 
     println(" Crear subgrafo con {A, B, C}: \n")
-    val subgrafo = grafo.subgrafo(listof("A", "B", "C"))
+    val subgrafo = grafo.subgrafo(listOf("A", "B", "C"))
     println(" Subgrafo:")
     println(subgrafo)
     println(" Tamaño del subgrafo: ${subgrafo.tamano()}")
@@ -43,7 +43,7 @@ fun main() {
 
     //Grafo Vacio
     
-    println(" Grafo vacio: /n")
+    println(" Grafo vacio: \n")
     val grafoVacio = ListaAdyacenciaGrafo<Int>()
     println(" Tamaño: ${grafoVacio.tamano()}")
     println(" Obtener arcos de salida de 1: ${grafoVacio.obtenerArcosSalida(1)}")
